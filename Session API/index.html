@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastSpring Next-Gen Session API Demo</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/png" href="icon.png">
+    <script
+        id="fsc-api"
+        src="https://sbl.onfastspring.com/sbl/1.0.7/fastspring-builder.min.js"
+        type="text/javascript"
+        data-storefront="aharvey.test.onfastspring.com/embedded-session-demo">
+    </script>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="left-panel">
+            <h2>Next-Gen Checkout:<br>Session API Demo</h2>
+
+            <div class="form-group">
+                <label>First Name:</label> <input type="text" id="fname" value="Adam">
+            </div>
+            <div class="form-group">
+                <label>Last Name:</label> <input type="text" id="lname" value="Harvey">
+            </div>
+            <div class="form-group">
+                <label>Email:</label> <input type="email" id="email" value="aharvey+20260301@fastspring.com">
+            </div>
+
+            <hr />
+            <div>&nbsp;</div>
+
+            <div><span class="product-details" data-fsc-item-path="demo-product-1" data-fsc-item-display></span></div>
+            <div class="product-details">&euro;500</div>
+
+            <button id="checkout-btn">Buy Now</button>
+        </div>
+
+        <!-- FastSpring embedded checkout -->
+        <div class="right-panel">
+            <div id="fsc-embedded-checkout-container" style="display: none;">
+                <div class="spinner"></div>
+                <iframe 
+                    id="fsc-embedded-checkout-skeleton-custom" 
+                    name="fsc-embedded-checkout-skeleton-custom" 
+                    width="0px" 
+                    height="0%"
+                    frameborder="0" 
+                    style="display:none" 
+                    src="https://sbl.onfastspring.com/sbl/1.0.7/skeleton.html">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+            const btn = this;
+            const checkoutContainer = document.getElementById('fsc-embedded-checkout-container');
+
+            btn.disabled = true;
+            btn.innerText = "Processing...";
+            checkoutContainer.style.display = 'block';
+
+            // Grab the buyer details from the input form
+            const buyerDetails = {
+                firstName: document.getElementById('fname').value,
+                lastName: document.getElementById('lname').value,
+                email: document.getElementById('email').value
+            };
+
+            // call the session API
+            fetch('create-session.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(buyerDetails)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
+                    // If the session API call was successful, show the checkout
+                    fastspring.builder.checkout(data.id);
+                    btn.innerText = "Buy Now";
+                } else {
+                    resetButton(btn, checkoutContainer);
+                    console.error("API Error:", data);
+                }
+            })
+            .catch(err => {
+                resetButton(btn, checkoutContainer);
+                console.error("Fetch error:", err);
+            });
+        });
+
+        function resetButton(btn, container) {
+            btn.disabled = false;
+            btn.innerText = "Buy Now";
+            container.style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+:root {
+  /* FastSpring theme colours */
+  --fs-midnight: #1D224D;
+  --fs-blue: #008AFF;
+  --fs-blue-lightest: #EBF6FF;
+  --fs-border: #404040;
+  --fs-grey: #8d8d8d;
+  --fs-button-blue: #2563eb;
+  --fs-button-hover-blue: #286090;
+}
+
+html { 
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh; 
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px; 
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  background-image: url(https://aharvey.fastspringexamples.com/embeddedcheckout/images/page-bg.PNG);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-attachment: fixed;
+  color: var(--fs-midnight);
+  overflow-x: hidden;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  background: rgba(255, 255, 255, 0.95);
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  gap: 40px;
+  width: 90%;
+  max-width: 1200px;
+  min-height: auto; 
+  align-items: flex-start;
+  border: 1px solid #eee;
+}
+
+.left-panel {
+  flex: 0 0 350px;
+}
+
+.right-panel {
+flex: 1;
+  position: relative;
+  border-left: 1px solid #eee;
+  padding-left: 40px;
+  min-height: 650px;
+}
+
+h2 {
+  color: var(--fs-midnight);
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+/* Form Layout */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Input styling */
+input[type=text], 
+input[type=email] {
+  min-height: 36px;
+  width: 100%;
+  border: 1px solid var(--fs-border);
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 var(--fs-border);
+  padding-left: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+button {
+  margin-top: 20px;
+  border: 1px solid var(--fs-border);
+  border-radius: 6px;
+  box-shadow: 4px 4px 0 var(--fs-border);
+  cursor: pointer;
+  min-height: 44px;
+  width: 100%;
+  background-color: var(--fs-button-blue);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+button:hover:enabled {
+  background-color: var(--fs-button-hover-blue);
+  color: white;
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--fs-border);
+}
+
+button:active:enabled {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--fs-border);
+}
+
+button:disabled {
+  background-color: var(--fs-blue-lightest);
+  color: var(--fs-grey);
+  border: 1px solid var(--fs-grey); 
+  box-shadow: 4px 4px 0 var(--fs-grey);
+  opacity: 0.8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.product-details {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Spinner */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--fs-blue-lightest);
+  border-top: 5px solid var(--fs-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 40%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#fsc-embedded-checkout-container {
+  width: 100% !important;
+  overflow: visible !important;
+  margin-top: -20px;
+}
