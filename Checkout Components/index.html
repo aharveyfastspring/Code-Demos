@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FastSpring Checkout Components Demo</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/png" href="icon.png">
+
+    <!-- SBL v2 SDK -->
+    <script src="https://cdn.onfastspring.com/checkout-sdk/latest/fastspring-sdk.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Initalise and mount the FastSpring SDK and checkout components -->
+    <script type="module" src="fs-sdk.js"></script>
+    <script type="module" src="fs-components.js"></script>
+
+    <script>
+        // Generate a new email address with today's date, for demo purposes only
+        document.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const datePart = now.getFullYear().toString()
+                + String(now.getMonth() + 1).padStart(2, '0')
+                + String(now.getDate()).padStart(2, '0');
+            document.getElementById('email').value = `aharvey+${datePart}@fastspring.com`;
+        });
+    </script>
+
+    <div class="main-container">
+        <div class="left-panel">
+            <h2>Next-Gen Checkout:<br>Checkout Components Demo</h2>
+
+            <div class="form-group">
+                <label>First Name:</label> <input type="text" id="fname" value="Adam">
+            </div>
+            <div class="form-group">
+                <label>Last Name:</label> <input type="text" id="lname" value="Harvey">
+            </div>
+            <div class="form-group">
+                <label>Email:</label> <input type="email" id="email">
+            </div>
+
+            <hr />
+            <div>&nbsp;</div>
+
+            <div class="product-details">Demo Product 1</div>
+            <div class="product-details">&euro;500</div>
+
+            <button id="checkout-btn">Buy Now</button>
+        </div>
+
+        <div class="right-panel">
+            <!-- FastSpring Checkout Components -->
+            <div id="card-element"></div>
+            <br />
+            <div id="pay-button-element"></div>
+            <div id="disclosures-element"></div>
+        </div>
+
+    </div>
+
+    <script type="module">
+
+        // This code creates the API call to the /sessions API endpoint and passes the session ID to the checkout
+
+        import { sdk } from './fs-sdk.js';
+        
+        document.getElementById('checkout-btn').addEventListener('click', function () {
+            const btn = this;
+            const checkoutContainer = document.getElementById('fsc-embedded-checkout-container');
+
+            btn.disabled = true;
+            btn.innerText = "Processing...";
+
+            // Grab the buyer details from the input form
+            const buyerDetails = {
+                firstName: document.getElementById('fname').value,
+                lastName: document.getElementById('lname').value,
+                email: document.getElementById('email').value
+            };
+
+            // call the session API
+            fetch('create-session.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(buyerDetails)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.id) {
+                        // If the session API call was successful, show the checkout
+                        sdk.checkout(data.id, {
+                        onSuccess: () => {
+                            console.log('Session loaded — checkout is ready');
+                        },
+                        onError: (error) => {
+                            console.error('Session load failed:', error);
+                        }
+                        });
+                        btn.innerText = "Buy Now";
+                    } else {
+                        resetButton(btn);
+                        console.error("API Error:", data);
+                    }
+                })
+                .catch(err => {
+                    resetButton(btn);
+                    console.error("Fetch error:", err);
+                });
+        });
+
+        function resetButton(btn) {
+            btn.disabled = false;
+            btn.innerText = "Buy Now";
+        }
+    </script>
+
+</body>
+
+</html>
