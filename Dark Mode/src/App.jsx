@@ -19,7 +19,11 @@ function App() {
     <FastSpringProvider storefront={STOREFRONTS[theme]}>
       <header className="app-header">
         <div className="brand">
-          <span className="brand-mark" aria-hidden="true"></span>
+          <svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="5" y="3.5" width="14" height="5" rx="2.5" transform="rotate(-25 12 6)" fill="#ffb073" />
+            <rect x="5" y="9.5" width="14" height="5" rx="2.5" transform="rotate(-25 12 12)" fill="#ff9a56" />
+            <rect x="5" y="15.5" width="14" height="5" rx="2.5" transform="rotate(-25 12 18)" fill="#f2723a" />
+          </svg>
           Dark Mode Toggle
         </div>
         <button
