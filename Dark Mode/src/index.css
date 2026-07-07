@@ -59,8 +59,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 620px;
+  min-height: 711px;
   position: relative;
+  transition: height 0.2s ease;
 }
 
 #fsc-embedded-checkout-container iframe {
