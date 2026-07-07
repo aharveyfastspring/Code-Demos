@@ -1,0 +1,70 @@
+:root {
+  --text: #08060d;
+  --text-muted: #6b7280;
+  --bg: #ffffff;
+  --surface: rgba(255, 255, 255, 0.72);
+  --border: #e5e7eb;
+  --track: #e5e7eb;
+  --thumb: #ffffff;
+  --thumb-shadow: rgba(15, 15, 20, 0.18);
+  --sun: #b45309;
+  --sun-dim: #d1d5db;
+  --moon: #9ca3af;
+  --moon-dim: #d1d5db;
+
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font: 18px/145% system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme='dark'] {
+  --text: #f3f4f6;
+  --text-muted: #9199a6;
+  --bg: #16171d;
+  --surface: rgba(22, 23, 29, 0.72);
+  --border: #2e303a;
+  --track: #2b2d37;
+  --thumb: #3a3d4a;
+  --thumb-shadow: rgba(0, 0, 0, 0.5);
+  --sun: #6b7280;
+  --sun-dim: #4b4e59;
+  --moon: #c7d2fe;
+  --moon-dim: #4b4e59;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+  padding-top: 100px;
+  background: var(--bg);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+#fsc-embedded-checkout-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 620px;
+  position: relative;
+}
+
+#fsc-embedded-checkout-container iframe {
+  background: transparent !important;
+  border: none;
+  overflow: hidden;
+}
