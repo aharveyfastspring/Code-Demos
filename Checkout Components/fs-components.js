@@ -103,3 +103,71 @@ const disclosuresComponent = sdk.components.create('fs-disclosures', {
 });
 
 disclosuresComponent.mount('#disclosures-element');
+
+// Coupon Component
+
+const couponComponent = sdk.components.create('fs-coupon', {
+  style: {
+    state: {
+      default: {
+        container: {
+          background: 'transparent',
+          border: 'none',
+          boxShadow: 'none',
+          padding: '0'
+        },
+        input: {
+          background: '#ffffff',
+          borderColor: '#404040',
+          borderRadius: '6px',
+          boxShadow: '3px 3px 0 #404040',
+          height: '44px',
+          color: '#1D224D',
+          fontSize: '16px',
+          fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
+        },
+        button: {
+          background: '#ff9950',
+          color: '#ffffff',
+          border: '1px solid #404040',
+          borderRadius: '6px',
+          boxShadow: '4px 4px 0 #404040',
+          fontWeight: 'bold',
+          fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
+        },
+        chip: {
+          background: '#fff3ea',
+          color: '#ff9950',
+          borderRadius: '12px'
+        },
+        toggle: {
+          color: '#0066cc',
+          fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+          fontSize: '18px'
+        }
+      },
+      focus: {
+        input: {
+          borderColor: '#4d90fe'
+        }
+      },
+      hover: {
+        button: {
+          background: '#e6873f'
+        }
+      },
+      disabled: {
+        button: {
+          background: '#ffe3cc',
+          color: '#8d8d8d',
+          border: '1px solid #8d8d8d',
+          boxShadow: '4px 4px 0 #8d8d8d',
+          opacity: '0.8',
+          cursor: 'not-allowed'
+        }
+      }
+    }
+  }
+});
+
+couponComponent.mount('#coupon-element');
