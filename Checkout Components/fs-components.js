@@ -107,6 +107,7 @@ disclosuresComponent.mount('#disclosures-element');
 // Coupon Component
 
 const couponComponent = sdk.components.create('fs-coupon', {
+  presentation: 'expanded',
   style: {
     state: {
       default: {
